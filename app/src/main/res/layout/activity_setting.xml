@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_e6"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorOnly"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rlWatermark"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/titleWatermark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:text="@string/text_watermark"
+                android:textColor="@color/color_12"
+                android:textSize="@dimen/sp_15" />
+
+            <ImageView
+                android:id="@+id/raWatermark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_8"
+                android:src="@drawable/ic_right_arrow" />
+
+            <TextView
+                android:id="@+id/tvWatermark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_4"
+                android:layout_marginRight="@dimen/dp_4"
+                android:layout_toLeftOf="@id/raWatermark"
+                android:layout_toRightOf="@id/titleWatermark"
+                android:ellipsize="end"
+                android:gravity="right"
+                android:maxLines="1"
+                android:text="@string/app_name"
+                android:textColor="@color/color_7a"
+                android:textSize="@dimen/sp_14" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_half"
+                android:layout_alignParentBottom="true"
+                android:background="@color/color_ea" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlColor"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/titleColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:text="@string/text_color"
+                android:textColor="@color/color_12"
+                android:textSize="@dimen/sp_15" />
+
+            <ImageView
+                android:id="@+id/raColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_8"
+                android:src="@drawable/ic_right_arrow" />
+
+            <TextView
+                android:id="@+id/tvColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_4"
+                android:layout_marginRight="@dimen/dp_4"
+                android:layout_toLeftOf="@id/raColor"
+                android:layout_toRightOf="@id/titleColor"
+                android:ellipsize="end"
+                android:gravity="right"
+                android:maxLines="1"
+                android:text="@string/app_name"
+                android:textColor="@color/color_7a"
+                android:textSize="@dimen/sp_14" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_half"
+                android:layout_alignParentBottom="true"
+                android:background="@color/color_ea" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlTextSize"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48">
+
+            <TextView
+                android:id="@+id/titleTextSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:text="@string/text_size"
+                android:textColor="@color/color_12"
+                android:textSize="@dimen/sp_15" />
+
+            <ImageView
+                android:id="@+id/raTextSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_8"
+                android:src="@drawable/ic_right_arrow" />
+
+            <Spinner
+                android:id="@+id/spTextSize"
+                android:layout_width="@dimen/dp_222"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/raTextSize"
+                android:entries="@array/TextSize" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
