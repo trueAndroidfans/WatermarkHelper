@@ -1,4 +1,4 @@
-package com.aokiji.watermarkhelper.modules.setting
+package com.aokiji.watermarkhelper.ui.activity.setting
 
 import android.app.Activity
 import android.content.Intent
@@ -11,7 +11,7 @@ import android.widget.Spinner
 import com.aokiji.watermarkhelper.R
 import com.aokiji.watermarkhelper.Settings
 import com.aokiji.watermarkhelper.base.ToolbarActivity
-import com.aokiji.watermarkhelper.modules.setting.edit.EditActivity
+import com.aokiji.watermarkhelper.ui.activity.setting.edit.EditActivity
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener
 import com.orhanobut.logger.Logger

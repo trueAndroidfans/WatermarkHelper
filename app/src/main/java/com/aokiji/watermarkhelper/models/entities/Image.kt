@@ -1,4 +1,4 @@
-package com.aokiji.watermarkhelper.models
+package com.aokiji.watermarkhelper.models.entities
 
 import java.io.Serializable
 

@@ -1,4 +1,4 @@
-package com.aokiji.watermarkhelper.modules.setting.edit
+package com.aokiji.watermarkhelper.ui.activity.setting.edit
 
 import android.app.Activity
 import android.content.Intent

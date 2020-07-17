@@ -1,4 +1,4 @@
-package com.aokiji.watermarkhelper.adapter
+package com.aokiji.watermarkhelper.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aokiji.watermarkhelper.R
-import com.aokiji.watermarkhelper.models.Image
+import com.aokiji.watermarkhelper.models.entities.Image
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.recycler_item_photo.view.*
 
@@ -22,7 +22,10 @@ class PhotoViewsAdapter(private val context: Context, private val list: MutableL
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.recycler_item_photo, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.recycler_item_photo, parent, false)
+        )
 
     override fun getItemCount(): Int = list.size
 

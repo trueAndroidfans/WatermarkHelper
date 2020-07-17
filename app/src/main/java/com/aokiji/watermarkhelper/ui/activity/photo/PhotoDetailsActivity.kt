@@ -1,12 +1,12 @@
-package com.aokiji.watermarkhelper.modules.photo
+package com.aokiji.watermarkhelper.ui.activity.photo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.aokiji.watermarkhelper.R
 import com.aokiji.watermarkhelper.Settings
-import com.aokiji.watermarkhelper.adapter.PhotoViewsAdapter
-import com.aokiji.watermarkhelper.models.SummaryItem
+import com.aokiji.watermarkhelper.ui.adapter.PhotoViewsAdapter
+import com.aokiji.watermarkhelper.models.entities.SummaryItem
 import kotlinx.android.synthetic.main.activity_photo_details.*
 
 class PhotoDetailsActivity : AppCompatActivity() {
@@ -22,7 +22,10 @@ class PhotoDetailsActivity : AppCompatActivity() {
     private fun init() {
         val summaryItem = intent.getSerializableExtra(Settings.INTENT_KEY_IMAGES) as SummaryItem
         vpPhoto.apply {
-            adapter = PhotoViewsAdapter(context, summaryItem.images)
+            adapter = PhotoViewsAdapter(
+                context,
+                summaryItem.images
+            )
             registerOnPageChangeCallback(object : OnPageChangeCallback() {
                 override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                     super.onPageScrolled(position, positionOffset, positionOffsetPixels)

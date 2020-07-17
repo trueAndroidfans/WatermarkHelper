@@ -15,27 +15,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".modules.photo.PhotoDetailsActivity"
+            android:name=".ui.activity.photo.PhotoDetailsActivity"
             android:configChanges="screenLayout|keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme"></activity>
         <activity
-            android:name=".modules.setting.edit.EditActivity"
+            android:name=".ui.activity.setting.edit.EditActivity"
             android:configChanges="screenLayout|keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"
             android:theme="@style/BlueStatusBarTheme" />
         <activity
-            android:name=".modules.setting.SettingActivity"
+            android:name=".ui.activity.setting.SettingActivity"
             android:configChanges="screenLayout|keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"
             android:theme="@style/BlueStatusBarTheme" />
         <activity
-            android:name=".modules.add.AddWatermarkActivity"
+            android:name=".ui.activity.add.AddWatermarkActivity"
             android:configChanges="screenLayout|keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"
             android:theme="@style/BlueStatusBarTheme" />
         <activity
-            android:name=".modules.alpha.AlphaActivity"
+            android:name=".ui.activity.alpha.AlphaActivity"
             android:configChanges="screenLayout|keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme">
@@ -46,7 +46,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".modules.main.MainActivity"
+            android:name=".ui.activity.main.MainActivity"
             android:configChanges="screenLayout|keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"
             android:theme="@style/BlueStatusBarTheme" />

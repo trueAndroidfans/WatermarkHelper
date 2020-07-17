@@ -1,25 +1,22 @@
-package com.aokiji.watermarkhelper.modules.main
+package com.aokiji.watermarkhelper.ui.activity.main
 
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
-import android.text.TextPaint
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aokiji.watermarkhelper.R
 import com.aokiji.watermarkhelper.Settings
-import com.aokiji.watermarkhelper.adapter.SummaryAdapter
+import com.aokiji.watermarkhelper.ui.adapter.SummaryAdapter
 import com.aokiji.watermarkhelper.base.ToolbarActivity
-import com.aokiji.watermarkhelper.models.Image
-import com.aokiji.watermarkhelper.models.SummaryItem
-import com.aokiji.watermarkhelper.modules.add.AddWatermarkActivity
-import com.aokiji.watermarkhelper.modules.photo.PhotoDetailsActivity
-import com.aokiji.watermarkhelper.modules.setting.SettingActivity
-import com.orhanobut.logger.Logger
+import com.aokiji.watermarkhelper.models.entities.Image
+import com.aokiji.watermarkhelper.models.entities.SummaryItem
+import com.aokiji.watermarkhelper.ui.activity.add.AddWatermarkActivity
+import com.aokiji.watermarkhelper.ui.activity.photo.PhotoDetailsActivity
+import com.aokiji.watermarkhelper.ui.activity.setting.SettingActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
@@ -69,11 +66,12 @@ class MainActivity : ToolbarActivity() {
         val layoutManager = GridLayoutManager(this, 2)
         layoutManager.orientation = GridLayoutManager.VERTICAL
         rvMain.layoutManager = layoutManager
-        rvMain.adapter = SummaryAdapter(this, list) {
-            val intent = Intent(MainActivity@ this, PhotoDetailsActivity::class.java)
-            intent.putExtra(Settings.INTENT_KEY_IMAGES, list[it])
-            startActivity(intent)
-        }
+        rvMain.adapter =
+            SummaryAdapter(this, list) {
+                val intent = Intent(MainActivity@ this, PhotoDetailsActivity::class.java)
+                intent.putExtra(Settings.INTENT_KEY_IMAGES, list[it])
+                startActivity(intent)
+            }
     }
 
 
@@ -98,7 +96,11 @@ class MainActivity : ToolbarActivity() {
             for (it in files) {
                 val list = it.name.split("_")
                 if (list.isNotEmpty()) {
-                    val image = Image(list[0], list[1], it.path)
+                    val image = Image(
+                        list[0],
+                        list[1],
+                        it.path
+                    )
                     images.add(image)
                 }
             }
@@ -118,7 +120,13 @@ class MainActivity : ToolbarActivity() {
             if (map.isNotEmpty()) {
                 list.clear()
                 for (it in map.keys) {
-                    list.add(SummaryItem(map[it]!!, map[it]!!.size, it))
+                    list.add(
+                        SummaryItem(
+                            map[it]!!,
+                            map[it]!!.size,
+                            it
+                        )
+                    )
                 }
             }
         }

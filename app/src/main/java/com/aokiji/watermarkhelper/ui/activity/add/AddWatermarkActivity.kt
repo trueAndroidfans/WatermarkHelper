@@ -1,4 +1,4 @@
-package com.aokiji.watermarkhelper.modules.add
+package com.aokiji.watermarkhelper.ui.activity.add
 
 import android.Manifest
 import android.annotation.TargetApi

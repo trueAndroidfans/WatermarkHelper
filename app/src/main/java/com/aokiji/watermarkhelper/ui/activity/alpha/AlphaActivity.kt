@@ -1,10 +1,10 @@
-package com.aokiji.watermarkhelper.modules.alpha
+package com.aokiji.watermarkhelper.ui.activity.alpha
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.aokiji.watermarkhelper.R
-import com.aokiji.watermarkhelper.modules.main.MainActivity
+import com.aokiji.watermarkhelper.ui.activity.main.MainActivity
 import kotlinx.android.synthetic.main.activity_alpha.*
 
 class AlphaActivity : AppCompatActivity() {
