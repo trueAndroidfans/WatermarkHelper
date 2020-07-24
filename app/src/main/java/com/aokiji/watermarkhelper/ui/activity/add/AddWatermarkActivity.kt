@@ -21,6 +21,7 @@ import android.text.TextPaint
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.aokiji.watermarkhelper.R
 import com.aokiji.watermarkhelper.Settings
@@ -31,6 +32,7 @@ import com.bumptech.glide.Glide
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton
+import com.orhanobut.logger.Logger
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.mmkv.MMKV
 import io.reactivex.Observable
@@ -91,6 +93,7 @@ class AddWatermarkActivity : ToolbarActivity() {
                 .build()
         cameraButton.setOnClickListener {
             menu.close(true)
+            showMsg(this, "please wait.")
         }
         pictureButton.setOnClickListener {
             menu.close(true)
@@ -209,19 +212,20 @@ class AddWatermarkActivity : ToolbarActivity() {
         val width = bitmap.width
         val height = bitmap.height
         val canvas = Canvas(bitmap)
-        val textPaint = TextPaint()
-        textPaint.isAntiAlias = true
-        textPaint.isDither = true
-        textPaint.isFilterBitmap = true
-        val color = mmkv.decodeString(Settings.MMKV_KEY_WATERMARK_COLOR)
-        textPaint.color = if (color.isNullOrEmpty()) Color.parseColor("#7A7A7A") else Color.parseColor(color)
+        val textColor = mmkv.decodeString(Settings.MMKV_KEY_WATERMARK_COLOR)
         val textSizeString = mmkv.decodeString(Settings.MMKV_KEY_WATERMARK_TEXT_SIZE)
-        val textSize: Int = if (textSizeString.isNullOrEmpty()) 25 else textSizeString.split(" ")[0].toInt()
-        textPaint.textSize = sp2px(this, textSize.toFloat() * 2)
+        val size: Int = if (textSizeString.isNullOrEmpty()) 25 else textSizeString.split(" ")[0].toInt()
+        val textPaint = TextPaint().apply {
+            isAntiAlias = true
+            isDither = true
+            isFilterBitmap = true
+            color = if (textColor.isNullOrEmpty()) Color.parseColor("#7A7A7A") else Color.parseColor(textColor)
+            textSize = sp2px(this@AddWatermarkActivity, size.toFloat() * 2)
+        }
         val waterMark = mmkv.decodeString(Settings.MMKV_KEY_WATERMARK)
         val text = if (waterMark.isNullOrEmpty()) getString(R.string.app_name) else waterMark
-        val staticLayout = StaticLayout(text, textPaint, width - 5, Layout.Alignment.ALIGN_NORMAL, 1f, 1f, false)
-        canvas.translate(5f, (height - (staticLayout.height + 5)).toFloat())
+        val staticLayout = StaticLayout.Builder.obtain(text, 0, text.length, textPaint, width).build()
+        canvas.translate(0f, height - staticLayout.height.toFloat())
         staticLayout.draw(canvas)
         val file = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Date()) + ".jpg")
         val bufferedOutputStream = BufferedOutputStream(FileOutputStream(file))
