@@ -20,6 +20,7 @@ import android.text.StaticLayout
 import android.text.TextPaint
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -175,6 +176,7 @@ class AddWatermarkActivity : ToolbarActivity() {
     private fun displayImage(imagePath: String?) {
         this.imagePath = imagePath
         Glide.with(this).load(imagePath).into(ivPicture)
+        ivEmpty.visibility = View.GONE
     }
 
 
@@ -199,7 +201,10 @@ class AddWatermarkActivity : ToolbarActivity() {
                         .map { it1 -> create(it1) }
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { it2 -> showMsg(this, it2) }
+                        .subscribe { it2 ->
+                            showMsg(this, it2)
+                            finish()
+                        }
             } else {
                 showMsg(this, "allow permission please!")
             }

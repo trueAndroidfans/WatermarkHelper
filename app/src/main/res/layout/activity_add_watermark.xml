@@ -13,11 +13,28 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <ImageView
-        android:id="@+id/ivPicture"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/dp_8"
-        android:scaleType="fitCenter" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivPicture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_2"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/ivEmpty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/ic_empty_data"
+            android:drawablePadding="@dimen/dp_8"
+            android:gravity="center"
+            android:text="@string/text_empty_data"
+            android:textSize="@dimen/sp_15" />
+
+    </FrameLayout>
 
 </LinearLayout>

@@ -18,7 +18,9 @@ import com.aokiji.watermarkhelper.ui.activity.add.AddWatermarkActivity
 import com.aokiji.watermarkhelper.ui.activity.photo.PhotoDetailsActivity
 import com.aokiji.watermarkhelper.ui.activity.setting.SettingActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
+import kotlinx.android.synthetic.main.activity_add_watermark.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.toolBar
 import java.io.File
 
 class MainActivity : ToolbarActivity() {
@@ -67,11 +69,11 @@ class MainActivity : ToolbarActivity() {
         layoutManager.orientation = GridLayoutManager.VERTICAL
         rvMain.layoutManager = layoutManager
         rvMain.adapter =
-            SummaryAdapter(this, list) {
-                val intent = Intent(MainActivity@ this, PhotoDetailsActivity::class.java)
-                intent.putExtra(Settings.INTENT_KEY_IMAGES, list[it])
-                startActivity(intent)
-            }
+                SummaryAdapter(this, list) {
+                    val intent = Intent(MainActivity@ this, PhotoDetailsActivity::class.java)
+                    intent.putExtra(Settings.INTENT_KEY_IMAGES, list[it])
+                    startActivity(intent)
+                }
     }
 
 
@@ -97,9 +99,9 @@ class MainActivity : ToolbarActivity() {
                 val list = it.name.split("_")
                 if (list.isNotEmpty()) {
                     val image = Image(
-                        list[0],
-                        list[1],
-                        it.path
+                            list[0],
+                            list[1],
+                            it.path
                     )
                     images.add(image)
                 }
@@ -120,15 +122,10 @@ class MainActivity : ToolbarActivity() {
             if (map.isNotEmpty()) {
                 list.clear()
                 for (it in map.keys) {
-                    list.add(
-                        SummaryItem(
-                            map[it]!!,
-                            map[it]!!.size,
-                            it
-                        )
-                    )
+                    list.add(SummaryItem(map[it]!!, map[it]!!.size, it))
                 }
             }
+            tvEmptyData.visibility = View.GONE
         }
         rvMain.visibility = View.VISIBLE
         tvError.visibility = View.GONE

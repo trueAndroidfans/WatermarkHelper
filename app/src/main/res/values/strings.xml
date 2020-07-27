@@ -11,4 +11,5 @@
     <string name="action_save">保存</string>
     <string name="text_color">水印颜色</string>
     <string name="text_size">文字大小</string>
+    <string name="text_empty_data">暂无数据</string>
 </resources>

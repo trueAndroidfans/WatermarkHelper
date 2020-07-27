@@ -23,9 +23,7 @@ class PhotoViewsAdapter(private val context: Context, private val list: MutableL
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.recycler_item_photo, parent, false)
-        )
+            ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.recycler_item_photo, parent, false))
 
     override fun getItemCount(): Int = list.size
 

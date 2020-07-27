@@ -28,9 +28,7 @@ class SummaryAdapter(private val context: Context, private val list: List<Summar
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.recycler_item_main, parent, false)
-        )
+            ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.recycler_item_main, parent, false))
 
     override fun getItemCount(): Int = list.size
 
