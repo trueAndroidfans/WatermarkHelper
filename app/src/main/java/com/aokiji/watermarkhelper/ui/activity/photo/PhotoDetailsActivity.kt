@@ -22,10 +22,7 @@ class PhotoDetailsActivity : AppCompatActivity() {
     private fun init() {
         val summaryItem = intent.getSerializableExtra(Settings.INTENT_KEY_IMAGES) as SummaryItem
         vpPhoto.apply {
-            adapter = PhotoViewsAdapter(
-                context,
-                summaryItem.images
-            )
+            adapter = PhotoViewsAdapter(context, summaryItem.images)
             registerOnPageChangeCallback(object : OnPageChangeCallback() {
                 override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                     super.onPageScrolled(position, positionOffset, positionOffsetPixels)

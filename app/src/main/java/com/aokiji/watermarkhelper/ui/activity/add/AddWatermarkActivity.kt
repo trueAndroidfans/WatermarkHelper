@@ -198,11 +198,11 @@ class AddWatermarkActivity : ToolbarActivity() {
         prosecutor.request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe {
             if (it) {
                 Observable.just(imagePath)
-                        .map { it1 -> create(it1) }
+                        .map { path -> create(path) }
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { it2 ->
-                            showMsg(this, it2)
+                        .subscribe { newPath ->
+                            showMsg(this, newPath)
                             finish()
                         }
             } else {
@@ -225,7 +225,7 @@ class AddWatermarkActivity : ToolbarActivity() {
             isDither = true
             isFilterBitmap = true
             color = if (textColor.isNullOrEmpty()) Color.parseColor("#7A7A7A") else Color.parseColor(textColor)
-            textSize = sp2px(this@AddWatermarkActivity, size.toFloat() * 2)
+            textSize = sp2px(this@AddWatermarkActivity, size.toFloat())
         }
         val waterMark = mmkv.decodeString(Settings.MMKV_KEY_WATERMARK)
         val text = if (waterMark.isNullOrEmpty()) getString(R.string.app_name) else waterMark

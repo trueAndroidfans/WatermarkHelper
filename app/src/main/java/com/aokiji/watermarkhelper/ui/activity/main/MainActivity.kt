@@ -68,12 +68,11 @@ class MainActivity : ToolbarActivity() {
         val layoutManager = GridLayoutManager(this, 2)
         layoutManager.orientation = GridLayoutManager.VERTICAL
         rvMain.layoutManager = layoutManager
-        rvMain.adapter =
-                SummaryAdapter(this, list) {
-                    val intent = Intent(MainActivity@ this, PhotoDetailsActivity::class.java)
-                    intent.putExtra(Settings.INTENT_KEY_IMAGES, list[it])
-                    startActivity(intent)
-                }
+        rvMain.adapter = SummaryAdapter(this, list) {
+            val intent = Intent(MainActivity@ this, PhotoDetailsActivity::class.java)
+            intent.putExtra(Settings.INTENT_KEY_IMAGES, list[it])
+            startActivity(intent)
+        }
     }
 
 
@@ -98,11 +97,7 @@ class MainActivity : ToolbarActivity() {
             for (it in files) {
                 val list = it.name.split("_")
                 if (list.isNotEmpty()) {
-                    val image = Image(
-                            list[0],
-                            list[1],
-                            it.path
-                    )
+                    val image = Image(list[0], list[1], it.path)
                     images.add(image)
                 }
             }
