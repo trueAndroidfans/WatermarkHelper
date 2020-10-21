@@ -1,7 +1,7 @@
 # WatermarkHelper
 水印助手
 
-<img src="https://github.com/trueAndroidfans/WatermarkHelper/blob/master/image/1.jpg" width="30%" /> <img src="https://github.com/trueAndroidfans/WatermarkHelper/blob/master/image/2.jpg" width="30%" /> <img src="https://github.com/trueAndroidfans/WatermarkHelper/blob/master/image/3.jpg" width="30%" />
+<img src="https://github.com/trueAndroidfans/WatermarkHelper/blob/master/image/1.jpg" width="30%" /> <img src="https://github.com/trueAndroidfans/WatermarkHelper/blob/master/image/2.jpg" width="30%" /> <img src="https://github.com/trueAndroidfans/WatermarkHelper/blob/master/image/4.jpg" width="30%" />
 
 # Thanks
 + [MMKV](https://github.com/Tencent/MMKV)
