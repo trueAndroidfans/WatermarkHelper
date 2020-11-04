@@ -19,22 +19,22 @@
             android:name=".ui.activity.photo.PhotoDetailsActivity"
             android:configChanges="screenLayout|keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"
-            android:theme="@style/FullScreenTheme"></activity>
+            android:theme="@style/FullScreenTheme" />
         <activity
             android:name=".ui.activity.setting.edit.EditActivity"
             android:configChanges="screenLayout|keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"
-            android:theme="@style/BlueStatusBarTheme" />
+            android:theme="@style/BlackStatuesBarTheme" />
         <activity
             android:name=".ui.activity.setting.SettingActivity"
             android:configChanges="screenLayout|keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"
-            android:theme="@style/BlueStatusBarTheme" />
+            android:theme="@style/BlackStatuesBarTheme" />
         <activity
             android:name=".ui.activity.add.AddWatermarkActivity"
             android:configChanges="screenLayout|keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"
-            android:theme="@style/BlueStatusBarTheme" />
+            android:theme="@style/BlackStatuesBarTheme" />
         <activity
             android:name=".ui.activity.alpha.AlphaActivity"
             android:configChanges="screenLayout|keyboardHidden|orientation|locale"
@@ -50,7 +50,7 @@
             android:name=".ui.activity.main.MainActivity"
             android:configChanges="screenLayout|keyboardHidden|orientation|locale"
             android:screenOrientation="portrait"
-            android:theme="@style/BlueStatusBarTheme" />
+            android:theme="@style/BlackStatuesBarTheme" />
     </application>
 
 </manifest>

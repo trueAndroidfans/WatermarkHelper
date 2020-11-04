@@ -2,9 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_camera"
+        android:icon="@drawable/ic_camera"
+        android:title="@string/action_camera"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_picture"
+        android:icon="@drawable/ic_picture"
+        android:title="@string/action_picture"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_done"
         android:icon="@drawable/ic_hammer"
         android:title="@string/action_done"
         app:showAsAction="always" />
-
 </menu>

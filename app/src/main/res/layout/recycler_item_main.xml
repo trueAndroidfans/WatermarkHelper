@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_30"
         android:layout_alignParentBottom="true"
-        android:background="@color/color_Only_40">
+        android:background="@color/color_black_40">
 
         <TextView
             android:id="@+id/tvNumber"

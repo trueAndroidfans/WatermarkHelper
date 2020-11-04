@@ -10,7 +10,7 @@
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorOnly"
+        android:background="@android:color/black"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
@@ -136,21 +136,13 @@
                 android:textColor="@color/color_12"
                 android:textSize="@dimen/sp_15" />
 
-            <ImageView
-                android:id="@+id/raTextSize"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/spTextSize"
+                android:layout_width="@dimen/dp_150"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_8"
-                android:src="@drawable/ic_right_arrow" />
-
-            <Spinner
-                android:id="@+id/spTextSize"
-                android:layout_width="@dimen/dp_222"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/raTextSize"
                 android:entries="@array/TextSize" />
 
         </RelativeLayout>

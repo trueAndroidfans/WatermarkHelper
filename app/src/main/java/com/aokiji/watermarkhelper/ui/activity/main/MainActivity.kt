@@ -57,7 +57,7 @@ class MainActivity : ToolbarActivity() {
 
 
     private fun initRefreshLayout() {
-        refreshLayout.setColorSchemeResources(R.color.colorOnly, R.color.color_Only_40)
+        refreshLayout.setColorSchemeResources(android.R.color.black, R.color.color_12)
         refreshLayout.setOnRefreshListener {
             initData()
         }

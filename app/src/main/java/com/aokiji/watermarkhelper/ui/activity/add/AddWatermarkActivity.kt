@@ -15,25 +15,17 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
-import android.text.Layout
 import android.text.StaticLayout
 import android.text.TextPaint
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import com.aokiji.watermarkhelper.R
 import com.aokiji.watermarkhelper.Settings
 import com.aokiji.watermarkhelper.base.ToolbarActivity
-import com.aokiji.watermarkhelper.utils.showMsg
+import com.aokiji.watermarkhelper.ui.widget.Toast
 import com.aokiji.watermarkhelper.utils.sp2px
 import com.bumptech.glide.Glide
-import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton
-import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu
-import com.oguzdev.circularfloatingactionmenu.library.SubActionButton
-import com.orhanobut.logger.Logger
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.mmkv.MMKV
 import io.reactivex.Observable
@@ -71,35 +63,6 @@ class AddWatermarkActivity : ToolbarActivity() {
 
     private fun initView() {
         setupToolbar(toolBar, R.string.title_add_watermark, true)
-
-        initCircularFloatingActionMenu()
-    }
-
-
-    private fun initCircularFloatingActionMenu() {
-        val icon = ImageView(this)
-        icon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_add))
-        val actionButton = FloatingActionButton.Builder(this).setContentView(icon).build()
-        val itemBuilder = SubActionButton.Builder(this)
-        val picture = ImageView(this)
-        picture.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_picture))
-        val pictureButton = itemBuilder.setContentView(picture).build()
-        val camera = ImageView(this)
-        camera.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_camera))
-        val cameraButton = itemBuilder.setContentView(camera).build()
-        val menu = FloatingActionMenu.Builder(this)
-                .addSubActionView(pictureButton)
-                .addSubActionView(cameraButton)
-                .attachTo(actionButton)
-                .build()
-        cameraButton.setOnClickListener {
-            menu.close(true)
-            showMsg(this, "please wait.")
-        }
-        pictureButton.setOnClickListener {
-            menu.close(true)
-            openAlbum()
-        }
     }
 
 
@@ -169,6 +132,7 @@ class AddWatermarkActivity : ToolbarActivity() {
             }
             cursor.close()
         }
+
         return path
     }
 
@@ -188,7 +152,9 @@ class AddWatermarkActivity : ToolbarActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_done -> addWatermark()
+            R.id.action_camera -> openCamera()
+            R.id.action_picture -> openAlbum()
+            R.id.action_done -> if (imagePath.isNullOrEmpty()) Toast.e(this, "Please choose image.") else addWatermark()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -202,11 +168,11 @@ class AddWatermarkActivity : ToolbarActivity() {
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe { newPath ->
-                            showMsg(this, newPath)
+                            Toast.e(this, newPath)
                             finish()
                         }
             } else {
-                showMsg(this, "allow permission please!")
+                Toast.e(this, "allow permission please!")
             }
         }
     }
@@ -228,7 +194,7 @@ class AddWatermarkActivity : ToolbarActivity() {
             textSize = sp2px(this@AddWatermarkActivity, size.toFloat())
         }
         val waterMark = mmkv.decodeString(Settings.MMKV_KEY_WATERMARK)
-        val text = if (waterMark.isNullOrEmpty()) getString(R.string.app_name) else waterMark
+        val text = if (waterMark.isNullOrEmpty()) getString(R.string.app_name) else getString(R.string.text_watermark_title) + waterMark
         val staticLayout = StaticLayout.Builder.obtain(text, 0, text.length, textPaint, width).build()
         canvas.translate(0f, height - staticLayout.height.toFloat())
         staticLayout.draw(canvas)

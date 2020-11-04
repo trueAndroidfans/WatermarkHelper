@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="TextSize">
-        <item>20 sp</item>
-        <item>24 sp</item>
-        <item>28 sp</item>
-        <item>32 sp</item>
+        <item>4 sp</item>
+        <item>8 sp</item>
+        <item>12 sp</item>
+        <item>16 sp</item>
     </array>
 </resources>

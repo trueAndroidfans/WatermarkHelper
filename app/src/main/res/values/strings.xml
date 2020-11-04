@@ -4,6 +4,8 @@
     <string name="action_add">新增</string>
     <string name="action_setting">设置</string>
     <string name="title_add_watermark">新增水印</string>
+    <string name="action_camera">相机</string>
+    <string name="action_picture">相册</string>
     <string name="action_done">完成</string>
     <string name="title_setting">设置</string>
     <string name="text_watermark">水印内容</string>
@@ -12,4 +14,5 @@
     <string name="text_color">水印颜色</string>
     <string name="text_size">文字大小</string>
     <string name="text_empty_data">暂无数据</string>
+    <string name="text_watermark_title">水印助手@</string>
 </resources>

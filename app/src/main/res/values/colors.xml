@@ -4,8 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="colorOnly">#26A69A</color>
-    <color name="color_Only_40">#4026A69A</color>
+    <color name="color_black_40">#40000000</color>
     <color name="color_e6">#E6E6E6</color>
     <color name="color_12">#121212</color>
     <color name="color_7a">#7A7A7A</color>
