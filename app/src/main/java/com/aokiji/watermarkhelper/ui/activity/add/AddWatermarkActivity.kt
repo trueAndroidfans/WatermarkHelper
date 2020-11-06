@@ -185,7 +185,7 @@ class AddWatermarkActivity : ToolbarActivity() {
         val canvas = Canvas(bitmap)
         val textColor = mmkv.decodeString(Settings.MMKV_KEY_WATERMARK_COLOR)
         val textSizeString = mmkv.decodeString(Settings.MMKV_KEY_WATERMARK_TEXT_SIZE)
-        val size: Int = if (textSizeString.isNullOrEmpty()) 25 else textSizeString.split(" ")[0].toInt()
+        val size: Int = if (textSizeString.isNullOrEmpty()) 8 else textSizeString.split(" ")[0].toInt()
         val textPaint = TextPaint().apply {
             isAntiAlias = true
             isDither = true
@@ -194,7 +194,8 @@ class AddWatermarkActivity : ToolbarActivity() {
             textSize = sp2px(this@AddWatermarkActivity, size.toFloat())
         }
         val waterMark = mmkv.decodeString(Settings.MMKV_KEY_WATERMARK)
-        val text = if (waterMark.isNullOrEmpty()) getString(R.string.app_name) else getString(R.string.text_watermark_title) + waterMark
+        val waterMarkTitle = getString(R.string.text_watermark_title)
+        val text = if (waterMark.isNullOrEmpty()) waterMarkTitle else "$waterMarkTitle$waterMark"
         val staticLayout = StaticLayout.Builder.obtain(text, 0, text.length, textPaint, width).build()
         canvas.translate(0f, height - staticLayout.height.toFloat())
         staticLayout.draw(canvas)
