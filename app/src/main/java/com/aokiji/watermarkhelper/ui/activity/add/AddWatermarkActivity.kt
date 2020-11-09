@@ -11,6 +11,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
+import android.os.Build.VERSION.SDK
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
@@ -20,12 +21,14 @@ import android.text.TextPaint
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.core.content.FileProvider
 import com.aokiji.watermarkhelper.R
 import com.aokiji.watermarkhelper.Settings
 import com.aokiji.watermarkhelper.base.ToolbarActivity
 import com.aokiji.watermarkhelper.ui.widget.Toast
 import com.aokiji.watermarkhelper.utils.sp2px
 import com.bumptech.glide.Glide
+import com.orhanobut.logger.Logger
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.mmkv.MMKV
 import io.reactivex.Observable
@@ -45,6 +48,9 @@ class AddWatermarkActivity : ToolbarActivity() {
     private var imagePath: String? = ""
 
     private lateinit var mmkv: MMKV
+
+    private lateinit var imageFile: File
+    private lateinit var imageUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +73,14 @@ class AddWatermarkActivity : ToolbarActivity() {
 
 
     private fun openCamera() {
-
+        imageFile = File(externalCacheDir, "output_img.jpg")
+        if (imageFile.exists()) imageFile.delete()
+        imageFile.createNewFile()
+        imageUri = if (Build.VERSION.SDK_INT >= 24) FileProvider.getUriForFile(this, "com.aokiji.watermarkhelper.fileprovider", imageFile)
+        else Uri.fromFile(imageFile)
+        val intent = Intent("android.media.action.IMAGE_CAPTURE")
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+        startActivityForResult(intent, Settings.INTENT_KEY_TAKE_PHOTO)
     }
 
 
@@ -83,7 +96,10 @@ class AddWatermarkActivity : ToolbarActivity() {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 Settings.INTENT_KEY_TAKE_PHOTO -> {
-
+                    ivEmpty.visibility = View.GONE
+                    val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(imageUri))
+                    ivPicture.setImageBitmap(bitmap)
+                    imagePath = imageFile.path
                 }
                 Settings.INTENT_KEY_CHOSE_PHOTO -> {
                     if (Build.VERSION.SDK_INT >= 19) handleImageOnKitKat(data) else handleImageBeforeKitKat(data)
