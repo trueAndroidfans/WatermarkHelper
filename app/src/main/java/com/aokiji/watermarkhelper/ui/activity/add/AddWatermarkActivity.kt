@@ -11,7 +11,6 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
-import android.os.Build.VERSION.SDK
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
@@ -25,10 +24,10 @@ import androidx.core.content.FileProvider
 import com.aokiji.watermarkhelper.R
 import com.aokiji.watermarkhelper.Settings
 import com.aokiji.watermarkhelper.base.ToolbarActivity
+import com.aokiji.watermarkhelper.models.entities.Parameter
 import com.aokiji.watermarkhelper.ui.widget.Toast
 import com.aokiji.watermarkhelper.utils.sp2px
 import com.bumptech.glide.Glide
-import com.orhanobut.logger.Logger
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.mmkv.MMKV
 import io.reactivex.Observable
@@ -196,33 +195,49 @@ class AddWatermarkActivity : ToolbarActivity() {
 
     private fun create(imagePath: String?): String {
         val bitmap = BitmapFactory.decodeFile(imagePath).copy(Bitmap.Config.ARGB_8888, true)
-        val width = bitmap.width
-        val height = bitmap.height
         val canvas = Canvas(bitmap)
-        val textColor = mmkv.decodeString(Settings.MMKV_KEY_WATERMARK_COLOR)
-        val textSizeString = mmkv.decodeString(Settings.MMKV_KEY_WATERMARK_TEXT_SIZE)
-        val size: Int = if (textSizeString.isNullOrEmpty()) 8 else textSizeString.split(" ")[0].toInt()
+        val parameter = generateWatermarkParameter()
         val textPaint = TextPaint().apply {
             isAntiAlias = true
             isDither = true
             isFilterBitmap = true
-            color = if (textColor.isNullOrEmpty()) Color.parseColor("#7A7A7A") else Color.parseColor(textColor)
-            textSize = sp2px(this@AddWatermarkActivity, size.toFloat())
+            color = parameter.textColor
+            textSize = sp2px(this@AddWatermarkActivity, parameter.size.toFloat())
         }
-        val waterMark = mmkv.decodeString(Settings.MMKV_KEY_WATERMARK)
-        val waterMarkTitle = getString(R.string.text_watermark_title)
-        val text = if (waterMark.isNullOrEmpty()) waterMarkTitle else "$waterMarkTitle$waterMark"
-        val staticLayout = StaticLayout.Builder.obtain(text, 0, text.length, textPaint, width).build()
-        canvas.translate(0f, height - staticLayout.height.toFloat())
+        val staticLayout = StaticLayout.Builder.obtain(parameter.waterMark, 0, parameter.waterMark.length, textPaint, bitmap.width).build()
+        canvas.translate(0f, bitmap.height - staticLayout.height.toFloat())
         staticLayout.draw(canvas)
-        val file = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Date()) + ".jpg")
+
+        return generateFile(bitmap).path
+    }
+
+
+    private fun generateWatermarkParameter(): Parameter {
+        val textColor: Int =
+                if (mmkv.decodeString(Settings.MMKV_KEY_WATERMARK_COLOR).isNullOrEmpty())
+                    Color.parseColor("#7A7A7A")
+                else
+                    Color.parseColor(mmkv.decodeString(Settings.MMKV_KEY_WATERMARK_COLOR))
+        val textSize: Int =
+                if (mmkv.decodeString(Settings.MMKV_KEY_WATERMARK_TEXT_SIZE).isNullOrEmpty())
+                    8
+                else
+                    mmkv.decodeString(Settings.MMKV_KEY_WATERMARK_TEXT_SIZE).split(" ")[0].toInt()
+        val waterMark = getString(R.string.text_watermark_title) + mmkv.decodeString(Settings.MMKV_KEY_WATERMARK)
+        return Parameter(textColor, textSize, waterMark)
+    }
+
+
+    private fun generateFile(bitmap: Bitmap): File {
+        val file = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Date()) + ".jpg")
         val bufferedOutputStream = BufferedOutputStream(FileOutputStream(file))
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bufferedOutputStream)
         if (bitmap != null && !bitmap.isRecycled) bitmap.recycle()
         bufferedOutputStream.flush()
         bufferedOutputStream.close()
 
-        return file.path
+        return file
     }
 
 }
